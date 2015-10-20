@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Recent Flickr Photos</title>
+</head>
+<body ng-app="flickrPhotoViewer" class="mainBackground" ng-controller="flickrcontroller as vm">
+
+    <section class="topSection raised1">
+        <div class="dividers centerVertical tabletUp">
+            <h1>Recent Flickr Photos</h1>
+        </div>
+
+        <div class="dividers searchByTags centerVertical">
+            <label for="searchForTag">Search by tags </label>
+            <input ng-keyup="vm.searchOnEnterPress($event)" ng-model="vm.searchForTagString" id="searchForTag" type="text" />
+
+            <button class="searchButton centerVertical" ng-click="vm.newSearch()"><img src="Content/search.svg" /></button>
+        </div>
+
+    </section>
+
+    <section class="photoSection">
+
+        <div class="statusInfo" ng-show="vm.loading">
+            <p>Loading...</p>
+        </div>
+        <div class="statusInfo" ng-show="vm.recentPhotos.length == 0 && !vm.loading">
+            <p>No matches</p>
+        </div>
+
+        <div class="flickrPhoto" ng-repeat="photo in vm.recentPhotos">
+            <img class="center" ng-src="{{photo.media.m}}" />
+        </div>
+
+
+    </section>
+
+
+    <link href="Content/app.css" rel="stylesheet" />
+    <script src="scripts/angular.min.js"></script>
+    <script src="app/config/config.js"></script>
+    <script src="app/services/datacontext.js"></script>
+    <script src="app/flickrview/flickrcontroller.js"></script>
+</body>
+</html>
